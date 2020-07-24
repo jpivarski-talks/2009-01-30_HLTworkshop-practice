@@ -1,0 +1,140 @@
+\documentclass[compress]{beamer}
+\usepackage{ifthen,verbatim,ulem}
+
+\newcommand{\isnote}{}
+\xdefinecolor{lightyellow}{rgb}{1.,1.,0.25}
+\xdefinecolor{darkblue}{rgb}{0.1,0.1,0.7}
+
+%% Uncomment this to get annotations
+%% \def\notes{\addtocounter{page}{-1}
+%%            \renewcommand{\isnote}{*}
+%% 	   \beamertemplateshadingbackground{lightyellow}{white}
+%%            \begin{frame}
+%%            \frametitle{Notes for the previous page (page \insertpagenumber)}
+%%            \itemize}
+%% \def\endnotes{\enditemize
+%% 	      \end{frame}
+%%               \beamertemplateshadingbackground{white}{white}
+%%               \renewcommand{\isnote}{}}
+
+%% Uncomment this to not get annotations
+\def\notes{\comment}
+\def\endnotes{\endcomment}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{\mbox{ } \hfill
+\begin{minipage}{5.5 cm}
+\vspace{-0.75 cm} \small
+\end{minipage} \hfill
+\begin{minipage}{4.5 cm}
+\vspace{-0.75 cm} \small
+\begin{flushright}
+\ifthenelse{\equal{\insertpagenumber}{1}}{}{Jim Pivarski \hspace{0.2 cm} \insertpagenumber\isnote/\pageref{numpages}}
+\end{flushright}
+\end{minipage}\mbox{\hspace{0.2 cm}}\includegraphics[height=1 cm]{../cmslogo} \hspace{0.1 cm} \includegraphics[height=1 cm]{../tamulogo} \hspace{0.01 cm} \vspace{-1.05 cm}}
+
+\begin{document}
+\begin{frame}
+\vfill
+\begin{center}
+\textcolor{darkblue}{\Large HLT Trigger Review (\sout{Practice} Sketch)}
+
+\vfill
+\begin{columns}
+\column{0.3\linewidth}
+\begin{center}
+\large
+\textcolor{darkblue}{Jim Pivarski}
+\end{center}
+\end{columns}
+
+\begin{columns}
+\column{0.3\linewidth}
+\begin{center}
+\scriptsize
+{\it Texas A\&M University}
+\end{center}
+\end{columns}
+
+\vfill
+30 January, 2009
+
+\end{center}
+\end{frame}
+
+%% \begin{notes}
+%% \item This is the annotated version of my talk.
+%% \item If you want the version that I am presenting, download the one
+%% labeled ``slides'' on Indico (or just ignore these yellow pages).
+%% \item The annotated version is provided for extra detail and a written
+%% record of comments that I intend to make orally.
+%% \item Yellow notes refer to the content on the {\it previous} page.
+%% \item All other slides are identical for the two versions.
+%% \end{notes}
+
+\small
+
+\begin{frame}
+\frametitle{Outline}
+\begin{itemize}
+\item Triggers needed for alignment
+\begin{itemize}
+\item muon: majority of muons for long-term alignment project, parasitic with physics muon needs, existing triggers satisfy our needs
+\item cosmics: important for identifying and reducing dependence on tracker misalignment, only need tracker-pointing cosmics, parasitic with tracker alignment needs
+\item beam-halo: important for early alignment of the muon endcaps
+\end{itemize}
+
+\item Alignment reach\ldots
+\begin{itemize}
+\item with collisions muons: CSA08 results and projections for 200-300~$\mu$m alignment
+\item with cosmics: CRAFT results and projections for
+  more complete coverage of muon detector (we'll never reach all the
+  chambers since horizontal cosmics rate is zero)
+\item with beam-halo: September 2008 beam-halo alignment results
+\end{itemize}
+
+\item How often do we need to align?  Not often: show statistical
+  reproducibility of four CRAFT 3.8~T runs, separated by magnet
+  ramp-downs (and therefore relaxation of the system)
+
+\end{itemize}
+%% \hspace{-0.83 cm} \textcolor{darkblue}{\Large Outline2}
+\end{frame}
+
+\begin{frame}
+\frametitle{Outline (continued)}
+\begin{itemize}
+
+\item Structure of requested triggers
+\begin{itemize}
+\item Collisions muons and cosmics \mbox{covered elsewhere (thanks Andrei)\hspace{-1 cm}}
+\item CSC beam-halo triggers:
+\begin{itemize}
+\item HLT\_CSCBeamHalo: everything that passes L1
+\item HLT\_CSCBeamHaloRing2or3: requires level 2 CSC RecHits in ring 2 or 3, important because beam-halo distribution is {\it variable} (show plot) and peaked in ring 1--- we may need to prescale ring 1 and not rings 2 or 3
+\item HLT\_CSCBeamHaloOverlapsRing1, Ring2: requires muon to overlap two CSCs, determined with level 2 CSC RecHits only (no tracking), rate is about 50$\times$ less than whole HLT\_CSCBeamHalo rate
+\end{itemize}
+
+\item Computation time of CSC beam-halo triggers: quote MinBias (background) rates given in trigger menu table, signal rate is of course unknown\ldots
+
+\item Monitoring
+\begin{itemize}
+\item CSC beam-halo monitoring covered by Joe Gartner, U.\ Florida
+\item Plots of L1 bit rates exist (show them), expanding to \mbox{HLT paths\hspace{-1 cm}}
+\item Currently works on real data, can be made into a DQM routine and used in release validation, but isn't yet
+\end{itemize}
+
+\end{itemize}
+\end{itemize}
+\label{numpages}
+\end{frame}
+
+
+%% \section*{First section}
+%% \begin{frame}
+%% \begin{center}
+%% \Huge \textcolor{blue}{First section}
+%% \end{center}
+%% \end{frame}
+
+\end{document}
